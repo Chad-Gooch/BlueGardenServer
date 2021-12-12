@@ -6,10 +6,10 @@ const validateJWT = require('../middleware/validate-jwt');
 
 // Update Plants
 
-router.put('/create/:log_id', validateJWT, (req, res)=> { // change log_id
-    const {plant, description, genus, species} = req.body.log; // change req.body.log
+router.put('/changeplant/:log_id', validateJWT, (req, res)=> { // change log_id to changeplant?
+    const {plant, description, genus, species} = req.body.garden; // change req.body.log to req.body.garden?
 
-    models.LogModel.update({ // change LogModel
+    models.GardenModel.update({ // change LogModel
         plant,
         description,
         genus,

@@ -6,8 +6,8 @@ const validateJWT = require('../middleware/validate-jwt');
 
 // POST Plant
 
-router.post("/add", validateJWT, async (req, res) => {
-    const { plant, description, genus, species } = req.body.log; //change req.body.log
+router.post("/addplant", validateJWT, async (req, res) => {
+    const { plant, description, genus, species } = req.body.garden; //change req.body.log. req.body.garden?
     const { id } = req.user;
     const addPlant = {
         plant,
@@ -17,7 +17,7 @@ router.post("/add", validateJWT, async (req, res) => {
         owner: id
     }
     try {
-        const newAddPlant = await models.LogModel.create(addPlant); //change LogModel
+        const newAddPlant = await models.GardenModel.create(addPlant); //change LogModel. GardenModel?
         res.status(200).json(newAddPlant);
     } catch (err) {
         res.status(500).json({ error: err, attempt: addPlant });
