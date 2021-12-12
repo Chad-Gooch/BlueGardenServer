@@ -6,7 +6,7 @@ const validateJWT = require('../middleware/validate-jwt');
 
 // Update Plants
 
-router.put('/changeplant/:log_id', validateJWT, (req, res)=> { // change log_id to changeplant?
+router.put('/changeplant/:user_id', validateJWT, (req, res)=> { // change log_id to changeplant?
     const {plant, description, genus, species} = req.body.garden; // change req.body.log to req.body.garden?
 
     models.GardenModel.update({ // change LogModel
@@ -16,7 +16,7 @@ router.put('/changeplant/:log_id', validateJWT, (req, res)=> { // change log_id 
         species
     }, {
         where: {
-            id: req.params.log_id // change log_id
+            id: req.params.user_id // change log_id
         }
     })
     .then(updatePlant => res.status(200).json(updatePlant))
