@@ -13,10 +13,10 @@ app.use('/createlogin', controllers.createLogin);
 app.use('/login', controllers.userLogin);
 //app.use('/public', controllers.publicView);
 
-//app.use('/add', controllers.addPlant);
-//app.use('/change', controllers.changePlant);
-//app.use('/my', controllers.privateView);
-//app.use('/remove', controllers.removePlant);
+app.use('/add', controllers.addPlant);
+app.use('/change', controllers.changePlant);
+app.use('/my', controllers.privateView);
+app.use('/remove', controllers.removePlant);
 
 dbConnection.authenticate()
     .then(()=> dbConnection.sync())
