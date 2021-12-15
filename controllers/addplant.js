@@ -1,26 +1,27 @@
 const Express = require('express');
 const router = Express.Router();
 
-const { models } = require('./models');
+const { GardenModel } = require('../models');
 const validateJWT = require('../middleware/validate-jwt');
 
 // POST Plant
 
-router.post("/addplant", validateJWT, async (req, res) => {
-    const { plant, description, genus, species } = req.body.garden; //change req.body.log. req.body.garden?
-    const { id } = req.user;
+router.post("/", validateJWT, async (req, res) => {
+    const { plantName, species, plantImage, season} = req.body.garden;
+    const { idNumber } = req.user;
     const addPlant = {
-        plant,
-        description,
-        genus,
-        species,
-        owner: id
+        plantName:plantName,
+        species:species,
+        plantImage:plantImage,
+        season:season,
+        owner_id: idNumber
     }
+    
     try {
-        const newAddPlant = await models.GardenModel.create(addPlant); //change LogModel. GardenModel?
-        res.status(200).json(newAddPlant);
+        const createPlant = await GardenModel.create(addPlant);
+        res.status(200).json(addPlant);
     } catch (err) {
-        res.status(500).json({ error: err, attempt: addPlant });
+        res.status(500).json({ error: err});
     }
 
 });

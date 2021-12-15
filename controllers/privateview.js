@@ -1,21 +1,21 @@
 const Express = require("express");
 const router = Express.Router();
 let validateJWT = require("../middleware/validate-jwt");
-const { GardenModel } = require("../models/garden");
+const { GardenModel } = require("../models");
 
-router.get("/privateview", validateJWT, async (req, res) => {
-    const username = req.user.id;
-    const passwordhash = req.params.id;
+router.get("/", validateJWT, async (req, res) => {
+   const { idNumber } = req.user;
 
     try {
-        const userGarden = await GardenModel.findAll({
+        const myGarden = await GardenModel.findAll({
             where: {
-                username: username,
-                passwordhash: passwordhash
+                owner_id: idNumber,
             }
         });
-        res.status(200).json(userGarden);
+        res.status(200).json(myGarden);
     } catch (err) {
-        res.status(500).json({error: err});
+        res.status(500).json({error: `${idNumber}`});
     }
 });
+
+module.exports = router;

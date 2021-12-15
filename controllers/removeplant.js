@@ -1,19 +1,17 @@
 const Express = require("express");
 const router = Express.Router();
 let validateJWT = require("../middleware/validate-jwt");
+const { GardenModel } = require("../models");
 
-router.delete("/removeplant/:id", validateJWT, async (req, res) => {
-    const username = req.user.id;
-    const passwordhash = req.params.id;
+router.delete("/:id", validateJWT, async (req, res) => {
 
     try{
         const query = {
             where: {
-                username: username,
-                passwordhash: passwordhash
-                //May need to tweak here
+                idNumber: req.params.id,
             }
         };
+
         await GardenModel.destroy(query);
         res.status(200).json({message: "Plant Removed"});
     } catch (err) {

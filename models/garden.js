@@ -1,22 +1,43 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db");
 
-const log = db.define("log", {
-    description: {
+const garden = db.define("garden", {
+    idNumber: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        unique: true,
+    },
+    plantName: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    definition: {
+    species: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    result: {
+    plantImage: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    season: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    sharedWith: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    isPublic: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     },
     owner_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        allowNull: false
     }
 });
 
-module.exports = log;
+module.exports = garden;
