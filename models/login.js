@@ -10,7 +10,7 @@ const User = db.define('user', {
         unique: true,
     },
     email: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(64),
         allowNull: false,
         unique: true,
     },
